@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: application-deployment
+  namespace: otus
+  labels:
+    app: application-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: otus-homework
+  template:
+    metadata:
+      labels:
+        app: otus-homework
+    spec:
+      containers:
+        - image: dataceton/otus-homework:1.0
+          name: otus-homework
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
