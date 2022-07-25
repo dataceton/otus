@@ -1,0 +1,83 @@
+{
+	"info": {
+		"_postman_id": "f0ef10b7-c4ef-4aa4-94a5-325309255964",
+		"name": "homework1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "https://arch.homework/health",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('arch.homework/health должен отвечать 200', function() {",
+							"    pm.response.to.have.status(200)",
+							"});",
+							"",
+							"pm.test('arch.homework/health вернет status: ok', function() {",
+							"    pm.response.to.have.jsonBody({status: 'OK'})",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://arch.homework/health",
+					"protocol": "http",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://arch.homework/otusapp/daniil/health",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('arch.homework/otusapp/daniil/health должен отвечать 200', function() {",
+							"    pm.response.to.have.status(200)",
+							"});",
+							"",
+							"pm.test('arch.homework/otusapp/daniil/health вернет status: ok', function() {",
+							"    pm.response.to.have.jsonBody({status: 'OK'})",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://arch.homework/otusapp/daniil/health",
+					"protocol": "http",
+					"host": [
+						"arch",
+						"homework"
+					],
+					"path": [
+						"otusapp",
+						"daniil",
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
