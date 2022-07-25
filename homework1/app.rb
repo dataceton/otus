@@ -1,4 +1,3 @@
-# cat config.ru
 require "roda"
 
 class App < Roda
