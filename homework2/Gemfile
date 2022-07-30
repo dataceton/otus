@@ -15,6 +15,9 @@ gem 'zeitwerk', '~> 2.6'
 # Database
 gem 'sequel', '~> 5.58'
 
+# Make-like implementation
+gem 'rake', '~> 13.0', '>= 13.0.6'
+
 group :development, :test do
   gem 'pry-byebug', '~> 3.9'
   gem 'standard', '~> 1.14'
