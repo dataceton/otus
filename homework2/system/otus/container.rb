@@ -1,7 +1,6 @@
 require "bundler/setup"
 require "dry/system/container"
 require "zeitwerk"
-require "pry-byebug"
 
 module Otus
   class Container < Dry::System::Container
