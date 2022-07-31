@@ -13,6 +13,14 @@ module Otus
       config.component_dirs.namespaces.add "otus", key: nil
       config.component_dirs.add "lib"
     end
+
+    class << self
+      %i[production development test].each do |environment|
+        define_method("#{environment}?") do
+          environment == env
+        end
+      end
+    end
   end
 
   Import = Container.injector

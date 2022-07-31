@@ -4,8 +4,12 @@ Otus::Container.register_provider(:database) do
   end
 
   start do
+    target.start :logger
     target.start :environments
 
-    # register(:database, Sequel.connect(ENV.delete('DATABASE_URL'))
+    db = Sequel.connect ENV.delete('DATABASE_URL')
+    db.loggers << target[:logger]
+
+    register(:database, db)
   end
 end
