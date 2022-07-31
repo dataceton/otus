@@ -1,6 +1,6 @@
 Otus::Container.register_provider(:logger) do
   prepare do
-    require 'logger'
+    require "logger"
   end
 
   start do

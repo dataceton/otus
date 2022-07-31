@@ -1,6 +1,6 @@
 Otus::Container.register_provider(:models) do
   prepare do
-    require 'sequel/model'
+    require "sequel/model"
   end
 
   start do
