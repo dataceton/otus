@@ -10,8 +10,21 @@ module Otus
     configure do |config|
       config.root = File.expand_path "../..", __dir__
 
-      config.component_dirs.namespaces.add "otus", key: nil
-      config.component_dirs.add "lib"
+      config.inflector = Dry::Inflector.new do |inflections|
+        inflections.acronym("JSON")
+      end
+
+      config.component_dirs.auto_register = proc do |component|
+        !component.identifier.include?("entities") || component.identifier.include?("types")
+      end
+
+      config.component_dirs.add "lib" do |dir|
+        dir.namespaces.add "otus", key: nil
+      end
+
+      # config.component_dirs.add "system/roda_plugins" do |dir|
+      #   dir.auto_register = false
+      # end
     end
 
     class << self

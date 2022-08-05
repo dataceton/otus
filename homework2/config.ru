@@ -1,4 +1,4 @@
-require_relative "app"
 require_relative "system/boot"
+require_relative "app"
 
 run Otus::App.freeze.app

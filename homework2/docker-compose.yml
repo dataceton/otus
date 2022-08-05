@@ -8,6 +8,7 @@ services:
       - postgres
     volumes:
       - .:/app
+      - gems:/usr/local/bundle/gems
     tty: true
     stdin_open: true
 
@@ -20,4 +21,5 @@ services:
       - postgres:/var/lib/postgresql/data
 
 volumes:
+  gems:
   postgres:

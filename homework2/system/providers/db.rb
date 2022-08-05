@@ -1,4 +1,4 @@
-Otus::Container.register_provider(:database) do
+Otus::Container.register_provider(:db) do
   prepare do
     require "sequel/core"
   end
@@ -10,6 +10,6 @@ Otus::Container.register_provider(:database) do
     db = Sequel.connect ENV.delete("DATABASE_URL")
     db.loggers << target[:logger]
 
-    register(:database, db)
+    register("persistance.db", db)
   end
 end
