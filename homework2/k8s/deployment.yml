@@ -16,7 +16,7 @@ spec:
         app: otus-homework
     spec:
       containers:
-        - image: dataceton/otus-homework:1.0
+        - image: dataceton/otus-homework:2.0
           name: otus-homework
           imagePullPolicy: Always
           ports:
