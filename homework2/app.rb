@@ -13,8 +13,8 @@ module Otus
     plugin :error_handler do |e|
       case e
       when Users::Repository::NotFound
-         response.status = 404
-         request.render "error", message: e.message
+        response.status = 404
+        request.render "error", message: e.message
       end
     end
 

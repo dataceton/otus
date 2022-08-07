@@ -24,8 +24,8 @@ gem "dry-matcher", "~> 0.9.0"
 gem "dry-validation", "~> 1.8", ">= 1.8.1"
 
 # View rendering
-gem 'oj', '~> 3.13', '>= 3.13.19'
-gem 'jbuilder', '~> 2.11', '>= 2.11.5'
+gem "oj", "~> 3.13", ">= 3.13.19"
+gem "jbuilder", "~> 2.11", ">= 2.11.5"
 gem "tilt-jbuilder", "~> 0.7.1"
 
 # Make-like implementation
@@ -41,5 +41,5 @@ end
 group :test do
   gem "rack-test", "~> 2.0", ">= 2.0.2"
   gem "minitest", "~> 5.16", ">= 5.16.2"
-  gem 'factory_bot', '~> 6.2', '>= 6.2.1'
+  gem "factory_bot", "~> 6.2", ">= 6.2.1"
 end

@@ -1,10 +1,10 @@
 Otus::Container.register_provider(:oj) do
   prepare do
-    require 'json'
-    require 'oj'
+    require "json"
+    require "oj"
   end
 
   start do
-    Oj.mimic_JSON()
+    Oj.mimic_JSON
   end
 end

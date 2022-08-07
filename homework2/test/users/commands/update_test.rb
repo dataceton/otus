@@ -1,5 +1,5 @@
 require "minitest/autorun"
-require 'pry-byebug'
+require "pry-byebug"
 require_relative "../../../system/boot"
 
 class Otus::Users::Commands::UpdateTest < Minitest::Test
@@ -11,20 +11,19 @@ class Otus::Users::Commands::UpdateTest < Minitest::Test
   def setup
     super
     @user = repository.create(
-      username: 'test100',
-      first_name: 'test100',
-      last_name: 'test100',
-      phone: 'test100',
-      email: 'test100'
+      username: "test100",
+      first_name: "test100",
+      last_name: "test100",
+      phone: "test100",
+      email: "test100"
     )
   end
 
   def test_that_user_updated
     params = {
-      first_name: 'Firstname',
-      last_name: 'Lastname'
+      first_name: "Firstname",
+      last_name: "Lastname"
     }
-
 
     update.call(params)
   end

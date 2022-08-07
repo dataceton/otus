@@ -1,34 +1,32 @@
 require_relative "system/otus/container"
 
-
 namespace :db do
-  migrate = -> (version) {
+  migrate = lambda do |version|
     Otus::Container.start(:database)
-  
+
     Sequel.extension(:migration)
     Sequel::Migrator.apply(Otus::Container[:database], "db/migrate", version)
-    Rake::Task['db:dump'].invoke
-  }
-  
-  execute = -> (command) {
+  end
+
+  execute = lambda do |command|
     Otus::Container.start(:environments)
     Otus::Container.prepare(:database)
-  
+
     db_name_regex = /[^\/]+$/
-    db_url  = ENV["DATABASE_URL"].gsub(db_name_regex,"postgres")
+    db_url = ENV["DATABASE_URL"].gsub(db_name_regex, "postgres")
     db_name = ENV["DATABASE_URL"][db_name_regex]
-  
+
     Sequel.connect(db_url) do |db|
       db.execute("#{command} #{db_name}")
     end
-  }
+  end
 
-  desc "Migrate the database."
+  desc "Migrate the database"
   task :migrate do
     migrate.call(nil)
   end
 
-  desc "Rolling back latest migration."
+  desc "Rolling back latest migration"
   task :rollback do |_, _args|
     Otus::Container.start(:database)
     current_version = Otus::Container[:database].fetch("SELECT * FROM schema_info").first[:version]
@@ -36,20 +34,21 @@ namespace :db do
     migrate.call(current_version - 1)
   end
 
+  desc "Create the database"
   task :create do
     Otus::Container.start(:logger)
 
     execute.call("CREATE DATABASE")
-  rescue Sequel::DatabaseError  => e
+  rescue Sequel::DatabaseError => e
     Otus::Container[:logger].error(e.message)
   end
 
-
+  desc "Drop the database"
   task :drop do
     Otus::Container.start(:logger)
 
     execute.call("DROP DATABASE")
-  rescue Sequel::DatabaseError  => e
+  rescue Sequel::DatabaseError => e
     Otus::Container[:logger].error(e.message)
   end
 
@@ -64,7 +63,7 @@ namespace :db do
   # end
 end
 
-desc "Generate project documentation using yard."
+desc "Generate project documentation using yard"
 task :docs do
   sh %(yard doc *.rb app/ lib/)
 end
