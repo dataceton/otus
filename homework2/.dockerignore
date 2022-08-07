@@ -1,5 +1,7 @@
 k8s*
 test*
 gems*
+.devcontainer*
 .byebug_history
+.gitignore
 docker-compose.yml
