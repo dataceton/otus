@@ -1,12 +1,12 @@
 module Otus
   module Users
     class Repository
-      include Import["persistance.db"]
+      include Import[:database]
 
       class NotFound < StandardError; end
 
       def find(id)
-        result = db[:users].where(id: id).first
+        result = database[:users].where(id: id).first
         Entities::User.new(result) if result
       end
 
@@ -17,20 +17,20 @@ module Otus
       end
 
       def create(params)
-        id = db[:users].insert(params)
+        id = database[:users].insert(params)
         Entities::User.new(id: id, **params)
       end
 
       def save(user)
-        db[:users].where(id: user.id).update(user.attributes)
+        database[:users].where(id: user.id).update(user.attributes)
       end
 
       def delete(id)
-        db[:users].where(id: user.id).delete.positive?
+        database[:users].where(id: user.id).delete.positive?
       end
 
       def unique?(**params)
-        db[:users].where(params).empty?
+        database[:users].where(params).empty?
       end
 
       def build(params)
