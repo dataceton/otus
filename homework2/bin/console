@@ -1,2 +1,2 @@
 #!/bin/bash
-docker-compose run --rm app pry
+docker compose run --rm app pry

@@ -1,2 +1,2 @@
 #!/bin/bash
-docker-compose run --rm app standardrb --fix
+docker compose run --rm app standardrb --fix
