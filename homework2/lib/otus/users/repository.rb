@@ -26,7 +26,7 @@ module Otus
       end
 
       def delete(id)
-        database[:users].where(id: user.id).delete.positive?
+        database[:users].where(id: id).delete.positive?
       end
 
       def unique?(**params)

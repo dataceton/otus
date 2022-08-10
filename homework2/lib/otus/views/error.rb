@@ -5,7 +5,8 @@ module Otus
     class Error < View
       config.template = "shared/_error"
 
-      expose :message
+      expose :message, decorate: false
+      expose :data, decorate: false, default: nil
     end
   end
 end

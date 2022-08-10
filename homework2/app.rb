@@ -15,6 +15,9 @@ module Otus
       when Users::Repository::NotFound
         response.status = 404
         request.render "error", message: e.message
+      else
+        response.status = 500
+        request.render "error", message: e.message, data: e.backtrace
       end
     end
 
@@ -22,7 +25,7 @@ module Otus
 
     route do |r|
       r.get "health" do
-        {status: "OK"}
+        r.render "success", status: "OK"
       end
 
       r.on "users" do
@@ -64,18 +67,8 @@ module Otus
           end
 
           r.delete do
-            r.resolve "users.commands.delete" do |delete_user|
-              delete_user.call(user_id) do |m|
-                m.success do
-                  r.render "success"
-                end
-
-                m.failure do
-                  response.status = 422
-                  r.render "error", message: "Something goes wrong"
-                end
-              end
-            end
+            repository.delete(user_id)
+            r.render "success"
           end
         end
       end

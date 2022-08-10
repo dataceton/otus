@@ -5,7 +5,7 @@ module Otus
     class Fail < View
       config.template = "shared/_fail"
 
-      expose :data, default: nil
+      expose :data, decorate: false, default: nil
     end
   end
 end
