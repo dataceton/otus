@@ -19,6 +19,9 @@ spec:
         - image: dataceton/otus-homework:2.0
           name: otus-homework
           imagePullPolicy: Always
+          env:
+            - name: DATABASE_URL
+              value: postgres://otus:password@postgres:5432/otus_production
           ports:
             - containerPort: 80
           readinessProbe:

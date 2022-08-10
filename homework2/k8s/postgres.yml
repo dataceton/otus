@@ -29,15 +29,15 @@ spec:
       labels:
         app: postgres
     spec:
-      conntainers:
+      containers:
         - name: postgres
-          image: postgres:14.4-alpine
+          image: postgres:14
           ports:
             - containerPort: 5432
               name: postgresdb
           env:
             - name: POSTGRES_DB
-              value: otus-homework
+              value: otus_production
             - name: POSTGRES_USER
               value: otus
             - name: POSTGRES_PASSWORD
@@ -48,11 +48,10 @@ spec:
               subPath: postgres
   volumeClaimTemplates:
     - metadata:
-        name: postgresb
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      storageClassName: standard
-      resources:
-        requests:
-          storage: 1Gi
-            
+        name: postgresdb
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: standard
+        resources:
+          requests:
+            storage: 1Gi
