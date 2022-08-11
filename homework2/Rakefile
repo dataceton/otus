@@ -52,6 +52,14 @@ namespace :db do
     Otus::Container[:logger].error(e.message)
   end
 
+  desc "Raise an error if there are pending data migrations"
+  task :abort_if_pending_migrations do
+    Otus::Container.start(:database)
+
+    Sequel.extension(:migration)
+    Sequel::Migrator.check_current Otus::Container[:database], 'db/migrate'
+  end
+
   # desc 'Dump database schema to file.'
   # task :dump do
   #   sh %(pg_dump --schema-only --no-privileges --no-owner -s #{Otus::Container['database'].url} > db/structure.sql) if Otus::Container.development?
@@ -61,9 +69,4 @@ namespace :db do
   # task :seed do
   #   sh %(ruby db/seeds.rb)
   # end
-end
-
-desc "Generate project documentation using yard"
-task :docs do
-  sh %(yard doc *.rb app/ lib/)
 end

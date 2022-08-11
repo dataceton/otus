@@ -1,0 +1,35 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: migration-job
+  namespace: otus
+  labels:
+    app: migration-job
+spec:
+  template:
+    metadata:
+      name: migration-job
+      labels:
+        app: migration-job
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: postgres-check
+          image: postgres:14
+          imagePullPolicy: IfNotPresent
+          args: ["sh", "-c", "until pg_isready -h postgres -p 5432; do sleep 3; done"]
+          # env:
+          #   - name: POSTGRES_HOST
+          #     value: postgres
+          #   - name: POSTGRES_PORT
+          #     value: 5432
+
+      containers:
+        - name: otus-homework
+          env:
+            - name: DATABASE_URL
+              value: postgres://otus:password@postgres:5432/otus_production
+          image: dataceton/otus-homework:2.0
+          command: ["rake", "db:create", "db:migrate"]
+  backoffLimit: 0
+          

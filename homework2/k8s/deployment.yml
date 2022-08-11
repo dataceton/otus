@@ -1,3 +1,9 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: otus
+
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -15,6 +21,14 @@ spec:
       labels:
         app: otus-homework
     spec:
+      initContainers:
+        - name: migration-check
+          image: dataceton/otus-homework:2.0
+          imagePullPolicy: Always
+          args: ["rake", "db:abort_if_pending_migrations"]
+          env:
+            - name: DATABASE_URL
+              value: postgres://otus:password@postgres:5432/otus_production
       containers:
         - image: dataceton/otus-homework:2.0
           name: otus-homework

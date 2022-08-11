@@ -50,7 +50,7 @@ spec:
     - metadata:
         name: postgresdb
       spec:
-        accessModes: [ "ReadWriteOnce" ]
+        accessModes: ["ReadWriteOnce"]
         storageClassName: standard
         resources:
           requests:
