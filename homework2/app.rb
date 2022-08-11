@@ -9,7 +9,7 @@ module Otus
     plugin :json_render
     plugin :json_parser
     plugin :resolve_container
-    plugin :common_logger, $stdout
+    plugin :common_logger, Otus::Container[:logger]
     plugin :error_handler do |e|
       case e
       when Users::Repository::NotFound
