@@ -26,9 +26,9 @@ spec:
 
       containers:
         - name: otus-homework
-          env:
-            - name: DATABASE_URL
-              value: postgres://otus:password@postgres:5432/otus_production
+          envFrom:
+            - secretRef:
+                name: application-secret
           image: dataceton/otus-homework:2.0
           command: ["rake", "db:create", "db:migrate"]
   backoffLimit: 0
